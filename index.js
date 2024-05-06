@@ -22,7 +22,6 @@ const getCountries = async () => {
    try {
      // Llamo a la API Rest Countries
     const response = await fetch('https://restcountries.com/v3.1/all')
-
     
       //se crea un if donde preguntamos si el status es diferente a 200 
       if(response.status === 200){
@@ -63,42 +62,6 @@ const getCountries = async () => {
 getCountries();
 
 
-// const getClima= async () => {
-//   try {
-//     const response = await fetch(`https://api.openweathermap.org/data/2.5/weather?lat={lat}&lon={lon}&appid=c83b5222e37b63209d213e758dfbaae0`)
-    
-
-//     //se crea un if donde preguntamos si el status es diferente a 200 
-//     if(response.status === 200){
-//       // Transformo la respuesta a JSON
-//       const datos1 = await response.json()
-      
-      
-//       // countries = datos;          
-
-     
-//     }else if(response.status === 401){
-//       console.log('colocaste la llave mal');
-//     }else if(response.status === 404){
-//         console.log('no se encontro el pais buscado');
-//     }else if(response.status == 400){
-//         console.log('ocurrio un error');
-//     }else{
-//         console.log('hubo un error no se que paso !');
-//     }
-
-
-
-
-
-    
-//   } catch (error) {
-//     console.log(error.message);
-//   }
-
-// }
-
-// getClima();
 
 
 
@@ -113,7 +76,7 @@ searchInput.addEventListener('input', async e => {
   buscador= e.target.value.toLowerCase()
   
   
-  let tecto = countries.filter(element => element.name.common.toLowerCase().includes(buscador));
+  let tecto = countries.filter(element => element.name.common.toLowerCase().startsWith(buscador));
   console.log(tecto,buscador);
   
   let paises =''
@@ -146,7 +109,7 @@ searchInput.addEventListener('input', async e => {
         `
 
 
-    }else if(tecto.length >= 5  ){
+    }else if(tecto.length >= 4 ){
     container.classList.remove('container-1')
     container.classList.add('container')
      paises+=`
@@ -158,8 +121,18 @@ searchInput.addEventListener('input', async e => {
             </div>
           </div> 
      `  
-    }else{
-      paises+=``
+    }else if(tecto.length >= 2){
+      container.classList.remove('container-1')
+    container.classList.add('container')
+     paises+=`
+          <div clas="conta-cart">
+            <div class="titi">    
+              <img  class="banderas" src="${element.flags.svg}">
+                        
+              <h3 class="titulo">${element.name.common}</h3>                
+            </div>
+          </div> 
+     `  
     }
     
   
@@ -176,16 +149,43 @@ searchInput.addEventListener('input', async e => {
     },1000)//1seg = 1000 mil
 
 
+// https://api.openweathermap.org/data/2.5/weather?lat=44.34&lon=10.99&appid=c83b5222e37b63209d213e758dfbaae0
+// c83b5222e37b63209d213e758dfbaae0
+
+const getClima= async () => {
+    try{
+      const response1 = await fetch(`https://api.openweathermap.org/data/2.5/weather?lat=44.34&lon=10.99&appid=c83b5222e37b63209d213e758dfbaae0`)
+      
+
+      // console.log(response1);
+      //   //se crea un if donde preguntamos si el status es diferente a 200 
+      if(response1.status === 200){
+      // Transformo la respuesta a JSON
+        const datos1 = await response1.json()
+        console.log(datos1);  
+      
+      datos1 = climas;          
+      
+     
+      }else if(response1.status === 401){
+        console.log('colocaste la llave mal');
+      }else if(response1.status === 404){
+          console.log('no se encontro el pais buscado');
+      }else if(response1.status == 400){
+          console.log('ocurrio un error');
+      }else{
+          console.log('hubo un error no se que paso !');
+      }
+
+
+
+
 
     
-    //       <div clas="container-cart-1">
-    //           <img  class="banderas" src="${element.flags.svg}"> 
-    //           <div class =" descripcion"> 
-    //             <h3 class="titulo">${element.name.common}</h3>
-    //             <p>${element.capital}</p>
-    //             <p>${element.population}</p>
-    //             <p>${element.region}</p>
-    //             <p>${element.timezones}</p>
-    //             <p>${element.continents}</p>
-    //           </div>
-    //       </div> 
+  } catch(error) {
+    console.log(error.message);
+  }
+
+}
+
+getClima();
