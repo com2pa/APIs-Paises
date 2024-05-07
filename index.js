@@ -16,23 +16,28 @@ const texto=document.querySelector('#texto-container')
 // Usar este array para crear el filtrado
 let countries = [];
 let climas=[]
-
+// https://api.openweathermap.org/data/2.5/weather?q=Venezuela&appid=c83b5222e37b63209d213e758dfbaae0
+// https://api.openweathermap.org/data/2.5/weather?lat=10.48&lon=-66.87&appid=c83b5222e37b63209d213e758dfbaae0
 // Funcion que pide todos los paises
+
+
+
 const getCountries = async () => {
    try {
-     // Llamo a la API Rest Countries
+     // Llamo a la API Rest Countries  
     const response = await fetch('https://restcountries.com/v3.1/all')
     
+
       //se crea un if donde preguntamos si el status es diferente a 200 
       if(response.status === 200){
         // Transformo la respuesta a JSON
         const datos = await response.json()
+       
         // Guardo el array de los paises recibido dentro de contries
-        
+       
         countries = datos;
         
-                
-
+        
         // Si el status es diferente a 200, lanzamos un error con el mensaje de la respuesta
         // const errorData = await response.json(); // Convertimos la respuesta de error a JSON para obtener el mensaje
         //throw  Error(data.message);
@@ -71,14 +76,18 @@ let info=texto.parentElement.children[0].innerHTML
 let cambiar = container.parentElement.children[1]
 // console.log(cambiar);
 
+
 searchInput.addEventListener('input', async e => {
   // Toda la logica del desafio va dentro del evento del input.
   buscador= e.target.value.toLowerCase()
-  
+  let pais = buscador
   
   let tecto = countries.filter(element => element.name.common.toLowerCase().startsWith(buscador));
-  console.log(tecto,buscador);
-  
+  // console.log(tecto,buscador);
+  const response1 = await fetch(`https://api.openweathermap.org/data/2.5/weather?q=${pais}&appid=c83b5222e37b63209d213e758dfbaae0`)
+  datos2 = await response1.json()
+  console.log(datos2);
+  // https://openweathermap.org/img/wn/03d@2x.png
   let paises =''
 
   tecto.forEach(element => {
@@ -94,7 +103,8 @@ searchInput.addEventListener('input', async e => {
         paises +=`
         
           <div clas="container-cart-1">
-            <img  class="banderas" src="${element.flags.svg}">           
+            <img  class="banderas" src="${element.flags.svg}">
+            <p id="climas"> nube |${datos2.main.temp} celcius</p>
           </div>
           <div class="descripcion"> 
                 <h3 class="titulo-1">${element.name.common}</h3>
@@ -151,10 +161,10 @@ searchInput.addEventListener('input', async e => {
 
 // https://api.openweathermap.org/data/2.5/weather?lat=44.34&lon=10.99&appid=c83b5222e37b63209d213e758dfbaae0
 // c83b5222e37b63209d213e758dfbaae0
-
+// https://api.openweathermap.org/data/2.5/weather?q=London&appid={API key}
 const getClima= async () => {
     try{
-      const response1 = await fetch(`https://api.openweathermap.org/data/2.5/weather?lat=44.34&lon=10.99&appid=c83b5222e37b63209d213e758dfbaae0`)
+      const response1 = await fetch(`https://api.openweathermap.org/data/2.5/weather?q=${pais}&appid=c83b5222e37b63209d213e758dfbaae0`)
       
 
       // console.log(response1);
@@ -188,4 +198,4 @@ const getClima= async () => {
 
 }
 
-getClima();
+// getClima();
