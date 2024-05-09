@@ -75,8 +75,35 @@ getCountries();
 let info=texto.parentElement.children[0].innerHTML
 
 let cambiar = container.parentElement.children[1]
-// console.log(cambiar);
 
+
+
+
+searchInput.addEventListener('input', async e => {
+ e.preventDefault();
+ // Toda la logica del desafio va dentro del evento del input.
+ let buscador= e.target.value.toLowerCase()
+//  console.log(buscador);
+
+ 
+ let pais = countries.filter(element => element.name.common.toLowerCase().startsWith(buscador));
+ console.log(pais);
+  
+
+
+  if(pais.length >= 10){
+    container.innerHTML = `
+                            <p>${info}</p>
+                          `
+  }
+
+})
+
+
+
+
+
+/* 
 
 searchInput.addEventListener('input', async e => {
   // Toda la logica del desafio va dentro del evento del input.
@@ -168,7 +195,7 @@ let nube = nubes.weather[0].icon
 
 });
       
-
+*/
 
       setInterval(()=>{  //intenvalo algo que se va repetir que se le especifique en esta funcion
         title.classList.toggle('color');// muestra la clase y la quita

@@ -211,7 +211,6 @@ input#search {
     font-size: 2rem;
     background-color: #b4b3b3;
   }
-} 
 @media(min-width:1024px){
   .container-1{
     /* display: flex;
