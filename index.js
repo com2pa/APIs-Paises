@@ -158,7 +158,7 @@ searchInput.addEventListener('input', async e => {
       container.classList.remove('container')
       container.classList.remove('container-1')      
     }else{
-      paises  += `    <p>${info} existe mas de ${pais.length} paises</p>   `    
+      paises  += `    <p id="texto-container" >${info} existe mas de ${pais.length} paises</p>   `    
       
       
     }
