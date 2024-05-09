@@ -89,113 +89,83 @@ searchInput.addEventListener('input', async e => {
  let pais = countries.filter(element => element.name.common.toLowerCase().startsWith(buscador));
  console.log(pais);
   
+  let paises=''
 
+  //  
+  if(pais.length === 1){
+    const response1 = await fetch(`https://api.openweathermap.org/data/2.5/weather?q=${pais[0].name.common}&appid=c83b5222e37b63209d213e758dfbaae0&units=metric`)
+    datos2 = await response1.json()
+    nubes = datos2;
+    console.log(nubes);
+    container.classList.remove('container')
+    container.classList.add('container-1')
 
-  if(pais.length >= 10){
-    container.innerHTML = `
-                            <p>${info}</p>
-                          `
-  }
+    let celcius = datos2.main.temp;
+    let icon = datos2.weather[0].icon;
+        pais.forEach(countr =>{
 
-})
+          let bande = countr.flags.svg;
+          let name = countr.name.common;
+          let capital = countr.capital;
+          let population = countr.population;
+          let continents = countr.region;
+          let timezones = countr.timezones;
+          let region = countr.continents;
+          
+          
 
+          paises = ` 
+            <div clas="container-cart-1">
+              <img  class="banderas" src="${bande}">
+              <p id="climas"><img src="https://openweathermap.org/img/wn/${icon}@2x.png" class="nubess">  | ${celcius}° celcius</p>
+            
+            </div>
+            <div class="descripcion"> 
+                  <h3 class="titulo-1">${name}</h3>
+                  <span>${capital}</span>
+                  <span>${population}</span>
+                  <span>${continents}</span>
+                  <span>${timezones}</span>
+                  <span>${region}</span>
+            </div>
+          ` 
+        });  
+    }else  if(pais.length < 10){
 
+        container.classList.remove('container-1')
+        container.classList.add('container')
+    
+        pais.forEach(element =>{
+          let cart = document.createElement('div')
+          cart.classList.add('conta-cart')
+          
+           paises  += `
+            <div class="conta-cart">
+              <div class="titi">    
+                <img  class="banderas" src="${element.flags.svg}">
+                          
+                <h3 class="titulo">${element.name.common}</h3>                
+              </div>
+            </div>
+          `
+          container.append(cart)
+          
+        })
 
-
-
-/* 
-
-searchInput.addEventListener('input', async e => {
-  // Toda la logica del desafio va dentro del evento del input.
-  buscador= e.target.value.toLowerCase()
-  let pais = buscador
-  
-  let tecto = countries.filter(element => element.name.common.toLowerCase().startsWith(buscador));
-  // console.log(tecto,buscador);
- 
-  const response1 = await fetch(`https://api.openweathermap.org/data/2.5/weather?q=${pais}&appid=c83b5222e37b63209d213e758dfbaae0&units=metric`)
-  datos2 = await response1.json()
-  
-  
-  nubes = datos2;
-// console.log(nubes.weathe[0].icon);
-let nube = nubes.weather[0].icon
-
-
-  // https://openweathermap.org/img/wn/03d@2x.png
-
-  
-  let paises =''
-
-  tecto.forEach(element => {
-    if(tecto.length >10){
-      paises = `
-        <p>${info}</p>
-      `
-      container.innerHTML=paises
-      
-    }else if(tecto.length === 1 ){
+    }else if(searchInput.value ===''){
       container.classList.remove('container')
-      container.classList.add('container-1')
+      container.classList.remove('container-1')      
+    }else{
+      paises  += `    <p>${info} existe mas de ${pais.length} paises</p>   `    
       
-     
       
-
-    
-      // <img src="https://openweathermap.org/img/wn/${datos2.weather.icon}@2x.png"
-        paises +=`
-        
-          <div clas="container-cart-1">
-            <img  class="banderas" src="${element.flags.svg}">
-            <p id="climas"><img src="https://openweathermap.org/img/wn/${nube}@2x.png" class="nubess">  | ${datos2.main.temp}° celcius</p>
-          </div>
-          <div class="descripcion"> 
-                <h3 class="titulo-1">${element.name.common}</h3>
-                <span>${element.capital}</span>
-                <span>${element.population}</span>
-                <span>${element.region}</span>
-                <span>${element.timezones}</span>
-                <span>${element.continents}</span>
-          </div>      
-        
-        
-        `
-
-
-    }else if(tecto.length >= 4 ){
-    container.classList.remove('container-1')
-    container.classList.add('container')
-     paises+=`
-          <div clas="conta-cart">
-            <div class="titi">    
-              <img  class="banderas" src="${element.flags.svg}">
-                        
-              <h3 class="titulo">${element.name.common}</h3>                
-            </div>
-          </div> 
-     `  
-    }else if(tecto.length >= 2){
-      container.classList.remove('container-1')
-    container.classList.add('container')
-     paises+=`
-          <div clas="conta-cart">
-            <div class="titi">    
-              <img  class="banderas" src="${element.flags.svg}">
-                        
-              <h3 class="titulo">${element.name.common}</h3>                
-            </div>
-          </div> 
-     `  
     }
-    
-  
-  })
-  container.innerHTML=paises
-  
+   
+  container.innerHTML = paises;
+  // mostrando el dom
 
+  
 });
-      
-*/
 
       setInterval(()=>{  //intenvalo algo que se va repetir que se le especifique en esta funcion
         title.classList.toggle('color');// muestra la clase y la quita
