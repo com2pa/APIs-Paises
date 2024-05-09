@@ -56,6 +56,10 @@ La cual se obtuvieron los siguientes resultados
 
 ![image](https://github.com/com2pa/APIs-Paises/assets/33188774/be83f62c-2635-4113-9068-d794eeef3e88)
 
+5
+
+![image](https://github.com/com2pa/APIs-Paises/assets/33188774/288a5cfe-9de4-47a9-85a1-e215ee4d42ec)
+
 
 
 
