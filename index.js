@@ -15,7 +15,8 @@ const texto=document.querySelector('#texto-container')
 // La api deberia pedirse solo una vez
 // Usar este array para crear el filtrado
 let countries = [];
-let climas=[]
+let climas=[];
+let nubes=[];
 // https://api.openweathermap.org/data/2.5/weather?q=Venezuela&appid=c83b5222e37b63209d213e758dfbaae0
 // https://api.openweathermap.org/data/2.5/weather?lat=10.48&lon=-66.87&appid=c83b5222e37b63209d213e758dfbaae0
 // Funcion que pide todos los paises
@@ -84,10 +85,19 @@ searchInput.addEventListener('input', async e => {
   
   let tecto = countries.filter(element => element.name.common.toLowerCase().startsWith(buscador));
   // console.log(tecto,buscador);
-  const response1 = await fetch(`https://api.openweathermap.org/data/2.5/weather?q=${pais}&appid=c83b5222e37b63209d213e758dfbaae0`)
+ 
+  const response1 = await fetch(`https://api.openweathermap.org/data/2.5/weather?q=${pais}&appid=c83b5222e37b63209d213e758dfbaae0&units=metric`)
   datos2 = await response1.json()
-  console.log(datos2);
+  
+  
+  nubes = datos2;
+// console.log(nubes.weathe[0].icon);
+let nube = nubes.weather[0].icon
+
+
   // https://openweathermap.org/img/wn/03d@2x.png
+
+  
   let paises =''
 
   tecto.forEach(element => {
@@ -100,11 +110,17 @@ searchInput.addEventListener('input', async e => {
     }else if(tecto.length === 1 ){
       container.classList.remove('container')
       container.classList.add('container-1')
+      
+     
+      
+
+    
+      // <img src="https://openweathermap.org/img/wn/${datos2.weather.icon}@2x.png"
         paises +=`
         
           <div clas="container-cart-1">
             <img  class="banderas" src="${element.flags.svg}">
-            <p id="climas"> nube |${datos2.main.temp} celcius</p>
+            <p id="climas"><img src="https://openweathermap.org/img/wn/${nube}@2x.png" class="nubess">  | ${datos2.main.temp}° celcius</p>
           </div>
           <div class="descripcion"> 
                 <h3 class="titulo-1">${element.name.common}</h3>
@@ -158,44 +174,3 @@ searchInput.addEventListener('input', async e => {
         title.classList.toggle('color');// muestra la clase y la quita
     },1000)//1seg = 1000 mil
 
-
-// https://api.openweathermap.org/data/2.5/weather?lat=44.34&lon=10.99&appid=c83b5222e37b63209d213e758dfbaae0
-// c83b5222e37b63209d213e758dfbaae0
-// https://api.openweathermap.org/data/2.5/weather?q=London&appid={API key}
-const getClima= async () => {
-    try{
-      const response1 = await fetch(`https://api.openweathermap.org/data/2.5/weather?q=${pais}&appid=c83b5222e37b63209d213e758dfbaae0`)
-      
-
-      // console.log(response1);
-      //   //se crea un if donde preguntamos si el status es diferente a 200 
-      if(response1.status === 200){
-      // Transformo la respuesta a JSON
-        const datos1 = await response1.json()
-        console.log(datos1);  
-      
-      datos1 = climas;          
-      
-     
-      }else if(response1.status === 401){
-        console.log('colocaste la llave mal');
-      }else if(response1.status === 404){
-          console.log('no se encontro el pais buscado');
-      }else if(response1.status == 400){
-          console.log('ocurrio un error');
-      }else{
-          console.log('hubo un error no se que paso !');
-      }
-
-
-
-
-
-    
-  } catch(error) {
-    console.log(error.message);
-  }
-
-}
-
-// getClima();
