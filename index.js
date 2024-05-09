@@ -81,6 +81,8 @@ let cambiar = container.parentElement.children[1]
 
 searchInput.addEventListener('input', async e => {
  e.preventDefault();
+ container.innerHTML=`<div class="loader"></div>`
+ 
  // Toda la logica del desafio va dentro del evento del input.
  let buscador= e.target.value.toLowerCase()
 //  console.log(buscador);
