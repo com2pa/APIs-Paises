@@ -93,8 +93,12 @@ searchInput.addEventListener('input', async e => {
   
   let paises=''
 
-  //  
-  if(pais.length === 1){
+  // 
+  if(pais.length >= 10){
+    paises+=`<p>${info} existe mas de ${pais.length} paises</p>  `
+    // console.log(info);
+    // container.innerHTML = paises;
+  }else if(pais.length === 1){
     const response1 = await fetch(`https://api.openweathermap.org/data/2.5/weather?q=${pais[0].name.common}&appid=c83b5222e37b63209d213e758dfbaae0&units=metric`)
     datos2 = await response1.json()
     nubes = datos2;
@@ -157,12 +161,9 @@ searchInput.addEventListener('input', async e => {
     }else if(searchInput.value ===''){
       container.classList.remove('container')
       container.classList.remove('container-1')
-            
-    }else if(pais.length >= 10){
-      paises  += `<p>${info} existe mas de ${pais.length} paises</p>   `    
-      
-      
+
     }
+    
    
   container.innerHTML = paises;
   // mostrando el dom
