@@ -89,7 +89,7 @@ searchInput.addEventListener('input', async e => {
 
  
  let pais = countries.filter(element => element.name.common.toLowerCase().startsWith(buscador));
- console.log(pais);
+//  console.log(pais);
   
   let paises=''
 
