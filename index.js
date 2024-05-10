@@ -156,9 +156,10 @@ searchInput.addEventListener('input', async e => {
 
     }else if(searchInput.value ===''){
       container.classList.remove('container')
-      container.classList.remove('container-1')      
-    }else{
-      paises  += `    <p id="texto-container" >${info} existe mas de ${pais.length} paises</p>   `    
+      container.classList.remove('container-1')
+            
+    }else if(pais.length >= 10){
+      paises  += `<p>${info} existe mas de ${pais.length} paises</p>   `    
       
       
     }

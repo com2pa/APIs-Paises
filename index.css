@@ -16,6 +16,7 @@ h6,
 p {
   margin: 0;
   background-color: aqua;
+  text-align: center;
 }
 
 .title{
@@ -226,9 +227,9 @@ input#search {
     font-size: 2rem;
     background-color: #b4b3b3;
   }
-  p{
+  /* p{
     font-size: 2rem;
-  }
+  } */
 }
 @media(min-width:1024px){
   .container-1{
@@ -243,7 +244,7 @@ input#search {
 
   .container{
     display: grid;
-    grid-template-columns:repeat(3,0.5fr);
+    grid-template-columns:repeat(3 , 0.5fr);
     gap: 1rem;
     margin: 0 2rem;
   }
@@ -267,6 +268,7 @@ input#search {
 
   #texto-container{
     font-size: 2rem;
+    display:block
   }
 
 }
@@ -302,9 +304,9 @@ input#search {
     font-size: 2rem;
     background-color: #b4b3b3;
   }
-  p{
+  /* p{
     font-size: 3rem;
-  }
+  } */
 }
 
 
@@ -347,7 +349,7 @@ input#search {
     width:100%;
     border-radius: 0 0 1rem 1rem;
   }
-  p{
+  /* p{
     font-size: 2rem;
-  }
+  } */
 }
